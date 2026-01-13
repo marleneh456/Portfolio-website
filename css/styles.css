@@ -855,7 +855,7 @@ footer.site-footer {
   backdrop-filter: opacity(25px);
 }
 
-  /* Dark Mode */
+/* Dark Mode */
 
 body.dark-mode .slider{
   border: 3px solid #5c5894;
@@ -1088,6 +1088,13 @@ body.dark-mode .Marlene-Habib-footer-icon{
 
   .learn-more-btn {
     padding: 5px 25px;
+  }
+
+  .info-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: -12px;
+    gap: 5px;
   }
 
   .project-box {
