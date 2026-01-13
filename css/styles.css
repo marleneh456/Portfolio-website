@@ -1031,10 +1031,33 @@ body.dark-mode .Marlene-Habib-footer-icon{
 
 @media (max-width: 1300px) and (max-height: 2700px) {
 
-  body, html{
+  body, html {
     font-size: 11px;
+    /* This ensures the background doesn't stretch past the screen height */
+    height: 100%; 
+    overflow-x: hidden;
   }
-  
+
+  .page-wrapper, 
+  html.dark-mode .page-wrapper {
+    /* Remove the background from the wrapper to prevent double-layering */
+    background: none !important;
+  }
+
+  body {
+    /* Apply the GIF directly to the body with fixed attachment */
+    background-image: url("../images/187ee1ab573759585c3422640b8f9ef6.gif");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* '100% 100%' forces the GIF to fit the phone screen exactly without zooming in */
+    background-size: 100% 100%;
+  }
+
+  html.dark-mode body {
+    background-image: url("../images/a8c2e22e56348b2ce47e923e23cca1a3.gif");
+  }
+
   .Marlene-Habib-icon {
     width: 80px;
     height: 80px;
