@@ -181,7 +181,8 @@ html.dark-mode .page-wrapper {
 #aura-toggle {
   background-color: #ffcc00;
   border: none;
-  padding: 8px 16px;
+  width: 100px;
+  height: 80px;
   border-radius: 8px;
   font-size: 14px;
   font-weight: bold;
@@ -193,6 +194,7 @@ html.dark-mode .page-wrapper {
   z-index: 9999;
   border: 2px solid #fff01f; /* Neon Yellow Border */
   box-shadow: 0 0 10px #fff01f;
+  color: black;
 }
 
 #aura-toggle:hover {
@@ -222,9 +224,8 @@ body, * {
 
 header {
  background: rgba(255, 255, 255, 0.368);
-  padding: 10px;
-  font-size: 14px;
-   backdrop-filter: opacity(25px);
+ backdrop-filter: opacity(25px);
+padding:10px;
 }
 
 .header-container {
@@ -244,11 +245,8 @@ header {
 
 header ul {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 10px;
 }
 
@@ -262,7 +260,9 @@ header li a
   display: block;
   color: black;
   text-align: center;
-  padding: 14px 16px;
+  width: 120px;
+  height: 50px;
+  padding: 5px;
   text-decoration: none;
   background: transparent;
   border-radius: 25px;
@@ -1068,7 +1068,7 @@ body.dark-mode .Marlene-Habib-footer-icon{
   }
 
   .header-container {
-    gap: 15px;
+    gap: 10px;
   }
 
   header ul {
@@ -1076,7 +1076,13 @@ body.dark-mode .Marlene-Habib-footer-icon{
   }
 
   header li a{
-    padding: 10px 12px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+
+  #aura-toggle{
+    align-items: center;
   }
 
   h1{
