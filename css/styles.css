@@ -47,18 +47,15 @@ html, body {
   box-shadow: 0 0 20px #9892e6;
 }
 
-
-
-/* The Moving Knob (The Circle) */
+/* --- THE EVEN CIRCLE FIX --- */
 .circle {
   background-color: #2196f3;
-  top: 2px;
-  bottom: 10px;
+  top: 2px; 
+  left: 3px; 
   height: 40px;
-  left: 5px;
+  width: 40px;
   position: absolute;
   transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  width: 40px;
   border-radius: 50%;
   z-index: 2;
 }
@@ -110,7 +107,9 @@ html, body {
   /* Four-pointed star shape */
   clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
 }
+
 .star-1 { top: 8px; right: 8px; width: 10px; height: 10px; }
+
 .star-2 { top: 22px; right: 10px; width: 6px; height: 6px; }
 
 /* --- TEXT LABELS --- */
@@ -118,7 +117,6 @@ html, body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-family: sans-serif;
   font-weight: bold;
   font-size: 12px;
   transition: 0.4s;
@@ -134,11 +132,10 @@ input:checked + .slider {
   background-color: #333;
 }
 
-/* Circle moves and becomes light grey/white circle per Image 6 & 7 */
 input:checked + .slider .circle {
-  transform: translateX(95px);
-  background-color: #f2f2f2; /* The "circle around the moon" you requested */
-  margin-top: 1px;
+  /* Adjusted for symmetry: 150px width - 40px circle - 6px border/padding = 98px */
+  transform: translateX(98px);
+  background-color: #f2f2f2; 
 }
 
 input:checked + .slider .day-graphics { opacity: 0; }
