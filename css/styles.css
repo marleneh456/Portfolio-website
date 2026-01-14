@@ -650,6 +650,41 @@ h1 {
     margin-bottom: 6px;
 }
 
+/* Base styling */
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 55px;
+  height: 55px;
+  background-color: #d00000; /* Match red button in image */
+  color: white;
+  text-decoration: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  
+  /* CRITICAL FOR MOBILE: */
+  z-index: 99999;          /* Must be higher than smokeCanvas */
+  cursor: pointer;
+  touch-action: manipulation; /* Optimizes for mobile tapping */
+  
+  /* Visibility toggle */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Class to trigger visibility */
+.back-to-top.active {
+  opacity: 1;
+  visibility: visible;
+}
+
 .back-to-top:hover {
   background-color: #868cf5;
   transform: scale(1.1);
@@ -658,11 +693,6 @@ h1 {
 /* Dark mode styling */
 body.dark-mode .back-to-top {
   background-color: #1b22a2;
-  color: white;
-}
-
-body.dark-mode .back-to-top:hover {
-  background-color: #2029de;
 }
 
 /* Experiences Sections */
@@ -1024,11 +1054,12 @@ body.dark-mode .Marlene-Habib-footer-icon{
 @media (max-width: 1300px) and (max-height: 2700px) {
 
 .back-to-top {
-    bottom: 30px; /* Moved up slightly so mobile browsers don't block it */
+    width: 65px; /* Bigger for mobile thumbs */
+    height: 65px;
+    bottom: 30px;
     right: 20px;
-    padding: 15px 20px; 
-    font-size: 20px; /* Larger arrow for easier tapping */
-    display: flex; 
+    font-size: 13px;
+    opacity: 0.9; /* Slightly transparent to see content behind */
   }
   
   body, html {
