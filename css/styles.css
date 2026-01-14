@@ -20,6 +20,7 @@ html, body {
 .theme-switch-container {
   display: flex;
   align-items: center;
+  margin-left: 50px;
 }
 
 .theme-switch {
@@ -229,10 +230,13 @@ padding:5px;
 
 }
 
+/* Ensure the container allows the ul to center */
 .header-container {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between; /* Spreads elements across the header */
+  width: 100%;
+  padding: 0 20px;
 }
 
 .Marlene-Habib-icon {
@@ -246,26 +250,34 @@ padding:5px;
 
 header ul {
   list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  display: grid;
+  /* Creates 4 columns exactly the width of your buttons */
+  grid-template-columns: repeat(4, 140px); 
+  gap: 15px;
+  padding: 0;
+  margin: 0 auto; /* This centers the grid group within the header */
+  justify-content: center; 
+  margin-left: 180px;
 }
 
-header li a
-{
-  display: block;
-  color: black;
+/* Ensures the text stays centered inside the buttons */
+header li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  color: black;
   width: 140px;
-  height: 40px;
+  height: 45px; /* Increased slightly for two-line text like "Technical Skills" */
   padding: 5px;
   text-decoration: none;
   border: 4px solid #ff6918;
+  background-color: #d5865b;
   box-shadow: 0 0 5px #ff6918, 0 0 5px #ff6918;
   transition: all 0.3s ease-in-out;
-  background-color: #d5865b;
   border-radius: 25px;
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 1.1; /* Helps "Technical Skills" fit better */
 }
 
 header li a:hover{
