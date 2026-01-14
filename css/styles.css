@@ -1234,9 +1234,8 @@ input:checked + .slider .circle {
   }
 
   .skill-category-container, .soft-skills-container {
-    padding: 20px;
+    padding: 25px;
     width: 300px;
-    font-size: 10px;
   }
 
   .skill-category-title {
@@ -1251,8 +1250,9 @@ input:checked + .slider .circle {
 
   .skill-card, .soft-skill-card {
     padding: 20px;
-    width: 110px;
+    width: 115px;
     height: 160px;
+    font-size: 9px;
   }
 
   .skill-card img, .soft-skill-card img {
