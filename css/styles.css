@@ -1059,7 +1059,7 @@ body.dark-mode .Marlene-Habib-footer-icon{
     grid-template-columns: auto auto auto;
     padding: 5px;
     gap: 5px;
-    align-items: start;
+    align-items:center;
   }
 
   header ul {
@@ -1082,7 +1082,7 @@ body.dark-mode .Marlene-Habib-footer-icon{
   }
 
 .theme-switch {
-    width: 110px; 
+    width: 180px; 
     height: 36px;
   }
 
@@ -1099,7 +1099,7 @@ body.dark-mode .Marlene-Habib-footer-icon{
   }
 
   input:checked + .slider .circle {
-    transform: translateX(68px);
+    transform: translateX(125px);
     background-color: #f2f2f2;
   }
 
@@ -1163,7 +1163,6 @@ body.dark-mode .Marlene-Habib-footer-icon{
   .theme-switch-container {
     grid-column: span 2;
     display: flex;
-    justify-content: center;
     align-items: center;
     height: 50px;
   }
@@ -1177,7 +1176,7 @@ body.dark-mode .Marlene-Habib-footer-icon{
   }
 
   h1{
-    width: 200px;
+    width: 300px;
     font-size: 24px;
   }
 
