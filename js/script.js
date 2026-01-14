@@ -30,7 +30,7 @@ const backToTopBtn = document.querySelector(".back-to-top");
 
 window.addEventListener("scroll", () => {
   // Show button after scrolling down 300px
-  if (window.scrollY > 1000) {
+  if (window.scrollY > 300) {
     backToTopBtn.style.display = "block";
   } else {
     backToTopBtn.style.display = "none";
