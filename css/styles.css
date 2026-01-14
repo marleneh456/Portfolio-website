@@ -222,53 +222,71 @@ body, * {
   transform: translate(-50%, -50%);
 }
 
+/* ================= HEADER ================= */
 header {
- background: rgba(255, 255, 255, 0.368);
- backdrop-filter: opacity(25px);
-padding:5px;
-
+  background: rgba(255, 255, 255, 0.368);
+  padding: 10px;
 }
 
+/* Main container */
 .header-container {
+  max-width: 1400px;          /* prevents desktop stretching */
+  margin: 0 auto;             /* keeps centered */
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 20px;
 }
 
+/* ================= LOGO ================= */
 .Marlene-Habib-icon {
   width: 130px;
   height: 130px;
   object-fit: contain;
-  border-radius: 50%; /* Ensuring it stays circular */
-  border: 8px solid #00f2ff; /* Neon Blue Border */
-  box-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff; /* Neon Glow */
+  border-radius: 50%;
+  border: 8px solid #00f2ff;
+  box-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff;
 }
 
-header ul {
-  list-style-type: none;
+/* ================= NAV WRAPPER ================= */
+.nav-wrapper {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
   gap: 10px;
 }
 
-header li a
-{
-  display: block;
-  color: black;
-  text-align: center;
-  width: 140px;
+/* ================= NAV LINKS ================= */
+.nav-links {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+/* Buttons */
+.nav-links li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
   height: 40px;
-  padding: 5px;
+
+  color: black;
   text-decoration: none;
   border: 4px solid #ff6918;
-  box-shadow: 0 0 5px #ff6918, 0 0 5px #ff6918;
-  transition: all 0.3s ease-in-out;
   background-color: #d5865b;
   border-radius: 25px;
+
+  box-shadow: 0 0 5px #ff6918;
+  transition: all 0.3s ease-in-out;
   font-size: 16px;
 }
 
-header li a:hover{
+.nav-links li a:hover {
   box-shadow: 0 0 15px #ff6918, 0 0 25px #ff6918;
   transform: scale(1.05);
 }
@@ -1055,124 +1073,98 @@ body.dark-mode .Marlene-Habib-footer-icon{
     height: 70px;
   }
 
+/* --- HEADER LAYOUT --- */
   .header-container {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    padding: 5px;
-    gap: 5px;
-    align-items:center;
+    display: flex;
+    flex-direction: column; /* Stacks Logo, then Nav/Toggle, then Aura */
+    align-items: center;
+    padding: 10px 5px;
+    gap: 10px;
   }
 
-  header ul {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+.nav-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+/* --- NAVIGATION LINKS --- */
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap; /* Allows links to wrap like desktop buttons but smaller */
+    justify-content: center;
     gap: 8px;
     padding: 0;
-    margin: 0;
+    list-style: none;
   }
 
-  /* Matching the size of header li a */
-  header li a {
-    width: 80px;
-    height: 36px;
+.nav-links li a {
+    width: 75px; /* Small fixed width for consistency */
+    height: 40px;
     font-size: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 15px;
+    border-radius: 12px;
+    padding: 2px 5px;
+    text-decoration: none;
+  }
+
+/* --- MINI THEME SWITCH --- */
+  .theme-switch-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
 .theme-switch {
-    width: 120px; 
-    height: 36px;
+    width: 110px; 
+    height: 32px;
   }
 
-  .slider {
-    top: 0; left: 0; right: 0; bottom: 0;
-    transition: 0.4s;
+.circle {
+    height: 24px;
+    width: 24px; 
+    top: 2px;
+    left: 4px;
   }
 
-  /* START POSITION: Fixed at 5px from the left */
-  .circle {
-    height: 26px;
-    width: 26px; 
-    left: 5px;
+input:checked + .slider .circle {
+    transform: translateX(72px);
   }
 
-  input:checked + .slider .circle {
-    transform: translateX(78px);
-    background-color: #f2f2f2;
-  }
-
-  /* DESIGN PRESERVATION (Sun/Moon/Stars) */
+/* Scaling Sun/Moon/Stars */
   .sun {
     width: 12px; height: 12px;
-    top: 4px; 
-    left: 4px;
-    position: absolute;
+    top: 6px; left: 6px;
   }
 
   .cloud {
-    width: 12px; height: 5px;
-    bottom: 6px; right: 3px;
-    background: white;
-    border-radius: 20px;
-    position: absolute;
-    box-shadow: -2px -1px 0 0 white;
+    width: 10px; height: 4px;
+    bottom: 5px; right: 3px;
   }
 
   .moon {
-    width: 12px; 
-    height: 12px;
-    top: 5px; 
-    left: 8px;
-    position: absolute;
-    border-radius: 50%;
+    width: 12px; height: 12px;
+    top: 6px; left: 8px;
     box-shadow: -4px 1px 0 0 #333; 
   }
 
-  .star-1 { top: 4px; right: 4px; width: 5px; height: 5px; }
+  .star-1 { top: 4px; right: 4px; width: 4px; height: 4px; }
   .star-2 { top: 14px; right: 6px; width: 3px; height: 3px; }
 
-  /* LABEL FIX: Prevents overlapping "ModeMode" */
   .label-day, .label-night {
     font-size: 10px;
-    font-weight: bold;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: opacity 0.2s ease-in-out;
-    white-space: nowrap;
   }
 
-  .label-day { 
-    right: 15px; /* Pushed further in to avoid the circle */
-    opacity: 1; 
-  }
-  
-  .label-night { 
-    left: 15px; /* Pushed further in to avoid the circle */
-    opacity: 0; 
-  }
-
-  input:checked + .slider .label-day { opacity: 0; }
-  input:checked + .slider .label-night { opacity: 1; }
-
-  input:checked + .slider { background-color: #333; }
-
-  .theme-switch-container {
-    grid-column: span 2;
-    display: flex;
-    align-items: center;
-    height: 50px;
-  }
-
-  /* Formatting the Aura Toggle Button */
+  /* --- AURA BUTTON --- */
   #aura-toggle {
-    font-size: 8px;
+    font-size: 10px;
+    width: 100px;
+    height: 40px;
     padding: 5px;
-    width: 50px;
-    height: 50px;
   }
 
   h1{
