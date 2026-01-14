@@ -1,13 +1,3 @@
-const backToTop = document.querySelector('.back-to-top');
-
-  window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) { // Show after scrolling 300px
-      backToTop.style.display = "block";
-    } else {
-      backToTop.style.display = "none";
-    }
-  });
-  
 // =======================
 // THEME TOGGLE
 // =======================
