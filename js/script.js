@@ -1,35 +1,3 @@
-// ==========================================
-// FIX: MOBILE & DESKTOP BACK-TO-TOP
-// ==========================================
-const btn = document.querySelector('.back-to-top');
-
-// 1. Show/Hide logic that works on all browsers
-window.addEventListener('scroll', () => {
-  // Check if scrolled more than 400px
-  if (window.scrollY > 400 || document.documentElement.scrollTop > 400) {
-    btn.classList.add('active');
-  } else {
-    btn.classList.remove('active');
-  }
-});
-
-// 2. Click logic for both Mouse and Touch
-function scrollToTop(e) {
-  e.preventDefault();
-  
-  // High-compatibility scroll
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: 'smooth'
-  });
-}
-
-// Add listeners for both desktop click and mobile touch
-btn.addEventListener('click', scrollToTop);
-// 'touchstart' makes it feel instant on iPhone/Android
-btn.addEventListener('touchstart', scrollToTop, { passive: false });
-
 // =======================
 // THEME TOGGLE
 // =======================
@@ -260,3 +228,28 @@ function removeTouch(e) {
 
 document.addEventListener("touchend", removeTouch);
 document.addEventListener("touchcancel", removeTouch);
+
+const mybutton = document.getElementById("backToTop");
+
+window.onscroll = function() {
+    // Show button after 200px scroll
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+};
+
+mybutton.onclick = function() {
+    alert("Button clicked! Forcing scroll now...");
+
+    // Method 1: The Modern Way
+    window.scrollTo({
+        top: 0,
+        behavior: 'auto' // Changed from 'smooth' to 'auto' to test if smooth was the bug
+    });
+
+    // Method 2: The "Old School" Way (Backup)
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0; // For Safari
+};
