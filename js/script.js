@@ -24,6 +24,30 @@ if (checkbox) {
 }
 
 // =======================
+// BACK TO TOP LOGIC (NEW)
+// =======================
+const backToTopBtn = document.querySelector(".back-to-top");
+
+window.addEventListener("scroll", () => {
+  // Show button after scrolling down 300px
+  if (window.scrollY > 300) {
+    backToTopBtn.style.display = "block";
+  } else {
+    backToTopBtn.style.display = "none";
+  }
+});
+
+if (backToTopBtn) {
+  backToTopBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+}
+s
+// =======================
 // CUSTOM CURSOR (DESKTOP ONLY)
 // =======================
 const isDesktop = !("ontouchstart" in window);
