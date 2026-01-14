@@ -650,7 +650,7 @@ h1 {
     margin-bottom: 6px;
 }
 
-/* Ensure the button is clickable and visible */
+/* Ensure the button is above the smoke canvas */
 .back-to-top {
   position: fixed;
   bottom: 20px;
@@ -661,9 +661,16 @@ h1 {
   border-radius: 50%;
   text-decoration: none;
   transition: all 0.3s ease;
-  z-index: 9999; /* Higher than the canvas */
-  display: none; /* Controlled by JS */
-  touch-action: manipulation; /* Optimizes for mobile tapping */
+  
+  /* CRITICAL: Must be higher than your canvas z-index */
+  z-index: 1001; /* Ensure this is HIGHER than the canvas */
+  pointer-events: auto; /* Ensure the button itself IS clickable */
+  
+  /* Ensure it doesn't disappear */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .back-to-top:hover {
@@ -1040,10 +1047,11 @@ body.dark-mode .Marlene-Habib-footer-icon{
 @media (max-width: 1300px) and (max-height: 2700px) {
 
 .back-to-top {
-    bottom: 30px; /* Moved up slightly for mobile bottom bars */
+    bottom: 30px; /* Moved up slightly so mobile browsers don't block it */
     right: 20px;
-    padding: 15px 20px; /* Larger tap area for thumbs */
-    font-size: 20px;
+    padding: 15px 20px; 
+    font-size: 20px; /* Larger arrow for easier tapping */
+    display: flex; 
   }
   
   body, html {

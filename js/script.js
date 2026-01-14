@@ -24,31 +24,24 @@ if (checkbox) {
 }
 
 // =======================
-// BACK TO TOP (FIXED FOR MOBILE)
+// BACK TO TOP LOGIC (NEW)
 // =======================
+// Replace your previous Back-To-Top logic with this:
 const backToTopBtn = document.querySelector(".back-to-top");
 
-const scrollToTop = (e) => {
+function scrollToTop(e) {
   e.preventDefault();
   window.scrollTo({
     top: 0,
     behavior: "smooth"
   });
-};
+}
 
 if (backToTopBtn) {
-  // Listen for both click and touchstart for instant mobile response
+  // Listen for both regular clicks and mobile touches
   backToTopBtn.addEventListener("click", scrollToTop);
   backToTopBtn.addEventListener("touchstart", scrollToTop, { passive: false });
 }
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 300) {
-    backToTopBtn.style.display = "block";
-  } else {
-    backToTopBtn.style.display = "none";
-  }
-});
 
 // =======================
 // CUSTOM CURSOR (DESKTOP ONLY)
@@ -58,7 +51,6 @@ const cursor = document.getElementById("customCursor");
 
 if (isDesktop && cursor) {
   document.addEventListener("mousemove", (e) => {
-    // Fixed template literal syntax with backticks
     cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
     const target = e.target;
     if (target.closest("a, button, [role='button'], [onclick], input[type='submit'], input[type='button']")) {
@@ -76,7 +68,7 @@ if (isDesktop && cursor) {
 }
 
 // ==================================================
-// SMOKE CURSOR
+// SMOKE CURSOR — SWIRL DESKTOP + SOFT CLOUD MOBILE
 // ==================================================
 let auraEnabled = false;
 const auraButton = document.getElementById("aura-toggle");
@@ -122,7 +114,7 @@ class SmokeParticle {
     if (!isDesktop) {
       this.size = 12 + Math.random() * 10; 
       this.life = 1.0;
-      this.fadeSpeed = 0.025;
+      this.fadeSpeed = 0.025; 
       this.blur = 18; 
       this.spin = (Math.random() - 0.5) * 0.15;
       this.speed = 1.0;
@@ -134,6 +126,7 @@ class SmokeParticle {
       this.spin = (Math.random() - 0.5) * 0.35;
       this.speed = 1.6;
     }
+
     this.angle = angle + (Math.random() - 0.5);
   }
 
@@ -147,10 +140,8 @@ class SmokeParticle {
   draw() {
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
-    // Fixed template literal syntax with backticks
     ctx.filter = `blur(${this.blur}px)`;
     ctx.fillStyle = `hsla(${smokeColor.h}, ${smokeColor.s}%, ${smokeColor.l}%, ${this.life * 0.5})`;
-
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     ctx.fill();
@@ -166,7 +157,6 @@ function animate() {
       const dx = p.x - p.lastX;
       const dy = p.y - p.lastY;
       const speed = Math.hypot(dx, dy);
-
       if (speed > 1.0) {
         const angle = Math.atan2(dy, dx) + Math.PI / 2;
         particles.push(new SmokeParticle(p.x, p.y, angle));
@@ -175,7 +165,6 @@ function animate() {
       p.lastY = p.y;
     }
   }
-
   for (let i = particles.length - 1; i >= 0; i--) {
     particles[i].update();
     particles[i].draw();
@@ -190,6 +179,10 @@ document.addEventListener("mousemove", (e) => {
   pointers.mouse = pointers.mouse || { x: e.clientX, y: e.clientY, lastX: e.clientX, lastY: e.clientY };
   pointers.mouse.x = e.clientX;
   pointers.mouse.y = e.clientY;
+});
+
+document.addEventListener("mouseleave", () => {
+  delete pointers.mouse;
 });
 
 document.addEventListener("touchstart", (e) => {
