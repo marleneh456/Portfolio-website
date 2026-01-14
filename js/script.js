@@ -24,26 +24,6 @@ if (checkbox) {
 }
 
 // =======================
-// BACK TO TOP LOGIC (NEW)
-// =======================
-// Replace your previous Back-To-Top logic with this:
-const backToTopBtn = document.querySelector(".back-to-top");
-
-function scrollToTop(e) {
-  e.preventDefault();
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-}
-
-if (backToTopBtn) {
-  // Listen for both regular clicks and mobile touches
-  backToTopBtn.addEventListener("click", scrollToTop);
-  backToTopBtn.addEventListener("touchstart", scrollToTop, { passive: false });
-}
-
-// =======================
 // CUSTOM CURSOR (DESKTOP ONLY)
 // =======================
 const isDesktop = !("ontouchstart" in window);
@@ -73,6 +53,7 @@ if (isDesktop && cursor) {
 let auraEnabled = false;
 const auraButton = document.getElementById("aura-toggle");
 
+// Initialize button text
 if (auraButton) {
   auraButton.textContent = "Smokey Cursor Tail Off";
   auraButton.addEventListener("click", () => {
@@ -85,6 +66,9 @@ if (auraButton) {
   });
 }
 
+// =======================
+// CANVAS
+// =======================
 const canvas = document.getElementById("smokeCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -96,6 +80,9 @@ window.addEventListener("resize", () => {
   height = canvas.height = window.innerHeight;
 });
 
+// =======================
+// POINTER STORAGE
+// =======================
 const pointers = {};
 let particles = [];
 let smokeColor = { h: 0, s: 80, l: 65 };
@@ -106,19 +93,24 @@ function pickRandomColor() {
   smokeColor.l = 50 + Math.random() * 20;
 }
 
+// =======================
+// PARTICLE CLASS
+// =======================
 class SmokeParticle {
   constructor(x, y, angle) {
     this.x = x;
     this.y = y;
 
     if (!isDesktop) {
+      // Optimized for Mobile/iPhone (Touch)
       this.size = 12 + Math.random() * 10; 
       this.life = 1.0;
-      this.fadeSpeed = 0.025; 
+      this.fadeSpeed = 0.025; // Slightly faster for mobile performance
       this.blur = 18; 
       this.spin = (Math.random() - 0.5) * 0.15;
       this.speed = 1.0;
     } else {
+      // Desktop Settings
       this.size = 18 + Math.random() * 12;
       this.life = 1.0;
       this.fadeSpeed = 0.015;
@@ -140,8 +132,11 @@ class SmokeParticle {
   draw() {
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
+    // Using a simpler blur for mobile to maintain 60fps
     ctx.filter = `blur(${this.blur}px)`;
+
     ctx.fillStyle = `hsla(${smokeColor.h}, ${smokeColor.s}%, ${smokeColor.l}%, ${this.life * 0.5})`;
+
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     ctx.fill();
@@ -149,33 +144,46 @@ class SmokeParticle {
   }
 }
 
+// =======================
+// ANIMATION LOOP
+// =======================
 function animate() {
   ctx.clearRect(0, 0, width, height);
+
   if (auraEnabled) {
     for (const id in pointers) {
       const p = pointers[id];
       const dx = p.x - p.lastX;
       const dy = p.y - p.lastY;
       const speed = Math.hypot(dx, dy);
+
+      // Trigger smoke if moved
       if (speed > 1.0) {
         const angle = Math.atan2(dy, dx) + Math.PI / 2;
         particles.push(new SmokeParticle(p.x, p.y, angle));
       }
+
       p.lastX = p.x;
       p.lastY = p.y;
     }
   }
+
   for (let i = particles.length - 1; i >= 0; i--) {
     particles[i].update();
     particles[i].draw();
     if (particles[i].life <= 0) particles.splice(i, 1);
   }
+
   requestAnimationFrame(animate);
 }
 animate();
 
+// =======================
+// MOUSE SUPPORT
+// =======================
 document.addEventListener("mousemove", (e) => {
   if (!pointers.mouse) pickRandomColor();
+  
   pointers.mouse = pointers.mouse || { x: e.clientX, y: e.clientY, lastX: e.clientX, lastY: e.clientY };
   pointers.mouse.x = e.clientX;
   pointers.mouse.y = e.clientY;
@@ -185,9 +193,13 @@ document.addEventListener("mouseleave", () => {
   delete pointers.mouse;
 });
 
+// =======================
+// TOUCH SUPPORT (iPhone/Mobile)
+// =======================
 document.addEventListener("touchstart", (e) => {
   pickRandomColor();
   for (const t of e.touches) {
+    // FIXED: was setting y to t.clientX
     pointers[t.identifier] = {
       x: t.clientX,
       y: t.clientY, 
@@ -198,6 +210,7 @@ document.addEventListener("touchstart", (e) => {
 }, { passive: true });
 
 document.addEventListener("touchmove", (e) => {
+  // We track coordinates regardless of auraEnabled to keep 'lastX' updated
   for (const t of e.touches) {
     const p = pointers[t.identifier];
     if (p) {
@@ -212,5 +225,6 @@ function removeTouch(e) {
     delete pointers[t.identifier];
   }
 }
+
 document.addEventListener("touchend", removeTouch);
 document.addEventListener("touchcancel", removeTouch);

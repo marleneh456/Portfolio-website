@@ -650,29 +650,6 @@ h1 {
     margin-bottom: 6px;
 }
 
-/* Ensure the button is above the smoke canvas */
-.back-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #6366f1;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 50%;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  
-  /* CRITICAL: Must be higher than your canvas z-index */
-  z-index: 1001; /* Ensure this is HIGHER than the canvas */
-  pointer-events: auto; /* Ensure the button itself IS clickable */
-  
-  /* Ensure it doesn't disappear */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
 .back-to-top:hover {
   background-color: #868cf5;
   transform: scale(1.1);
