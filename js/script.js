@@ -26,25 +26,21 @@ if (checkbox) {
 // =======================
 // BACK TO TOP LOGIC (NEW)
 // =======================
+// Replace your previous Back-To-Top logic with this:
 const backToTopBtn = document.querySelector(".back-to-top");
 
-window.addEventListener("scroll", () => {
-  // Show button after scrolling down 300px
-  if (window.scrollY > 300) {
-    backToTopBtn.style.display = "block";
-  } else {
-    backToTopBtn.style.display = "none";
-  }
-});
+function scrollToTop(e) {
+  e.preventDefault();
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
 
 if (backToTopBtn) {
-  backToTopBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  });
+  // Listen for both regular clicks and mobile touches
+  backToTopBtn.addEventListener("click", scrollToTop);
+  backToTopBtn.addEventListener("touchstart", scrollToTop, { passive: false });
 }
 
 // =======================

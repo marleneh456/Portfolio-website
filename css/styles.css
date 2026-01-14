@@ -170,11 +170,8 @@ html.dark-mode .page-wrapper {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* Let clicks pass through to buttons */
-  touch-action: none;   /* Essential for mobile tracking */
-  z-index: 9998;        /* Just behind your custom cursor */
+  pointer-events: none; /* Allows clicks to pass through the canvas to the button */
+  z-index: 999; 
 }
 
 /* Toggle Button (kept your style) */
@@ -666,7 +663,8 @@ h1 {
   transition: all 0.3s ease;
   
   /* CRITICAL: Must be higher than your canvas z-index */
-  z-index: 9999; 
+  z-index: 1001; /* Ensure this is HIGHER than the canvas */
+  pointer-events: auto; /* Ensure the button itself IS clickable */
   
   /* Ensure it doesn't disappear */
   display: flex;
