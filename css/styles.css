@@ -182,7 +182,7 @@ html.dark-mode .page-wrapper {
   background-color: #ffcc00;
   border: none;
   width: 100px;
-  height: 80px;
+  height: 70px;
   border-radius: 8px;
   font-size: 14px;
   font-weight: bold;
@@ -257,7 +257,7 @@ header li a
   color: black;
   text-align: center;
   width: 140px;
-  height: 50px;
+  height: 40px;
   padding: 5px;
   text-decoration: none;
   border: 4px solid #ff6918;
