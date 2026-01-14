@@ -663,6 +663,12 @@ h1 {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#backToTop:hover {
+  background-color: #555;
+  transform: scale(1.1);
 }
 
 /* Experiences Sections */

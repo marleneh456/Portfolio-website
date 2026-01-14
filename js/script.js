@@ -231,8 +231,8 @@ document.addEventListener("touchcancel", removeTouch);
 
 const mybutton = document.getElementById("backToTop");
 
+// Show/Hide button logic
 window.onscroll = function() {
-    // Show button after 200px scroll
     if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
         mybutton.style.display = "block";
     } else {
@@ -240,16 +240,15 @@ window.onscroll = function() {
     }
 };
 
+// Scroll to top logic
 mybutton.onclick = function() {
-    alert("Button clicked! Forcing scroll now...");
-
-    // Method 1: The Modern Way
+    // Attempt smooth scroll first
     window.scrollTo({
         top: 0,
-        behavior: 'auto' // Changed from 'smooth' to 'auto' to test if smooth was the bug
+        behavior: 'smooth'
     });
 
-    // Method 2: The "Old School" Way (Backup)
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    document.body.scrollTop = 0; // For Safari
+    // Backup: If smooth scroll isn't supported, jump to top
+    document.documentElement.scrollTop = 0; 
+    document.body.scrollTop = 0;
 };
