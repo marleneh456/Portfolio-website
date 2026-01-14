@@ -226,6 +226,7 @@ header {
  background: rgba(255, 255, 255, 0.368);
  backdrop-filter: opacity(25px);
 padding:10px;
+
 }
 
 .header-container {
@@ -389,7 +390,7 @@ h1 {
   border: 8px solid #87CEFA;
   box-shadow: 0 0 20px #87CEFA;
   width: 400px;
-  height:110px;
+  height:80px;
   background-color: #dcd7e4;
 
 }
@@ -1169,19 +1170,19 @@ body.dark-mode .Marlene-Habib-footer-icon{
 
   /* Formatting the Aura Toggle Button */
   #aura-toggle {
-    font-size: 10px;
+    font-size: 8px;
     padding: 5px;
-    width: 70px;
+    width: 50px;
     height: 50px;
   }
 
   h1{
     width: 200px;
-    font-size: 28px;
+    font-size: 24px;
   }
 
   .hero{
-    width: 330px;
+    width: 300px;
   }
 
   .profile-pic {
@@ -1199,7 +1200,7 @@ body.dark-mode .Marlene-Habib-footer-icon{
   }
 
   .about{
-    width:330px;
+    width:300px;
   }
 
   .learn-more-btn {
@@ -1220,28 +1221,30 @@ body.dark-mode .Marlene-Habib-footer-icon{
   }
 
   .project-image {
-    width: 330px;
-    height: 330px;
+    width: 280px;
+    height: 280px;
   }
 
   .project-info {
     padding: 10px;
     font-size: 10px;
+    width: 280px;
+    height: 280px;
   }
 
   .github-icon {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
   }
 
   .experience-box, .education-box{
-    width: 320px;
+    width: 300px;
     font-size: 10px;
   }
 
   .skill-category-container, .soft-skills-container {
     padding: 20px;
-    max-width: 350px;
+    width: 300px;
     font-size: 10px;
   }
 
@@ -1257,13 +1260,13 @@ body.dark-mode .Marlene-Habib-footer-icon{
 
   .skill-card, .soft-skill-card {
     padding: 20px;
-    width: 130px;
-    height: 180px;
+    width: 110px;
+    height: 160px;
   }
 
   .skill-card img, .soft-skill-card img {
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     margin-left: -2px;
   }
 
@@ -1272,11 +1275,11 @@ body.dark-mode .Marlene-Habib-footer-icon{
   }
 
   .contact-box{
-    width:330px;
+    width:300px;
   }
 
   .footer-content-box{
-    width: 300px;
+    width: 280px;
     height: 160px;
   }
 
