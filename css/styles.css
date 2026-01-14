@@ -1082,7 +1082,7 @@ body.dark-mode .Marlene-Habib-footer-icon{
   }
 
 .theme-switch {
-    width: 180px; 
+    width: 120px; 
     height: 36px;
   }
 
@@ -1099,16 +1099,15 @@ body.dark-mode .Marlene-Habib-footer-icon{
   }
 
   input:checked + .slider .circle {
-    transform: translateX(125px);
+    transform: translateX(78px);
     background-color: #f2f2f2;
   }
 
   /* DESIGN PRESERVATION (Sun/Moon/Stars) */
   .sun {
     width: 12px; height: 12px;
-    top: 4px; left: 4px;
-    background: #ffce54;
-    border-radius: 50%;
+    top: 4px; 
+    left: 4px;
     position: absolute;
   }
 
@@ -1122,8 +1121,10 @@ body.dark-mode .Marlene-Habib-footer-icon{
   }
 
   .moon {
-    width: 12px; height: 12px;
-    top: 5px; left: 8px;
+    width: 12px; 
+    height: 12px;
+    top: 5px; 
+    left: 8px;
     position: absolute;
     border-radius: 50%;
     box-shadow: -4px 1px 0 0 #333; 
@@ -1145,13 +1146,11 @@ body.dark-mode .Marlene-Habib-footer-icon{
 
   .label-day { 
     right: 15px; /* Pushed further in to avoid the circle */
-    color: #666; 
     opacity: 1; 
   }
   
   .label-night { 
     left: 15px; /* Pushed further in to avoid the circle */
-    color: white; 
     opacity: 0; 
   }
 
