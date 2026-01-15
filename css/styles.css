@@ -657,18 +657,28 @@ h1 {
   bottom: 30px;
   right: 30px;
   z-index: 99;
-  padding: 15px;
-  background-color: #333;
-  color: white;
+  padding: 30px;
+  background-color: #926cce;
+  color: black;
   border: none;
-  border-radius: 5px;
+  border-radius: 50px;
+  font-size: 28px;
   cursor: pointer;
   transition: opacity 0.3s ease-in-out;
 }
 
 #backToTop:hover {
-  background-color: #555;
+  background-color: #8f7ab3;
   transform: scale(1.1);
+}
+
+body.dark-mode #backToTop{
+  background-color: #27045f;
+  color: white;
+}
+
+body.dark-mode #backToTop:hover {
+  background-color: #4909b1;
 }
 
 /* Experiences Sections */
@@ -1033,7 +1043,7 @@ body.dark-mode .Marlene-Habib-footer-icon{
     bottom: 20px;
     right: 20px;
     padding: 20px;
-    border-radius: 50%;
+    font-size: 20px;
   }
 
   body, html {
