@@ -14,6 +14,7 @@ html, body {
   scroll-behavior: smooth;
   line-height: 1.15;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 /* Container layout */
@@ -164,39 +165,51 @@ html.dark-mode .page-wrapper {
   color: white;
 }
 
-
-/* Smokey Cursor Canvas */
-#smokeCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none; /* Allows clicks to pass through the canvas to the button */
-  z-index: 999; 
+/* ===== DIGITAL CLOCK ===== */
+.header-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 12px;
+  font-family: 'Roboto', sans-serif;
+  color: black;
+  text-align: center;
 }
 
-/* Toggle Button (kept your style) */
+#digital-time {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#digital-date {
+  font-size: 16px;
+}
+
+/* Dark mode support */
+body.dark-mode .header-clock {
+  color: #ffffff;
+}
+
+#fluidCanvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 998;
+}
+
 #aura-toggle {
-  background-color: #ffcc00;
-  border: none;
-  width: 100px;
+  background: #ffcc00;
+  border: 2px solid #fff01f;
+  box-shadow: 0 0 12px #fff01f;
+  border-radius: 10px;
+  width: 110px;
   height: 70px;
-  border-radius: 8px;
-  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s ease;
-  text-align: center;
-  opacity: 1; /* FULLY opaque */
-  position: relative;
-  z-index: 9999;
-  border: 2px solid #fff01f; /* Neon Yellow Border */
-  box-shadow: 0 0 10px #fff01f;
-  color: black;
 }
 
 #aura-toggle:hover {
   background-color: #ffaa00;
-  box-shadow: 0 0 15px #fff01f, 0 0 30px #fff01f;
 }
 
 /* Hide system cursor */

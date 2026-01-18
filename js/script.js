@@ -24,7 +24,7 @@ if (checkbox) {
 }
 
 // =======================
-// CUSTOM CURSOR (DESKTOP ONLY)
+// CUSTOM CURSOR (DESKTOP)
 // =======================
 const isDesktop = !("ontouchstart" in window);
 const cursor = document.getElementById("customCursor");
@@ -32,35 +32,40 @@ const cursor = document.getElementById("customCursor");
 if (isDesktop && cursor) {
   document.addEventListener("mousemove", (e) => {
     cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+
     const target = e.target;
-    if (target.closest("a, button, [role='button'], [onclick], input[type='submit'], input[type='button']")) {
+    if (target.closest("a, button, [role='button'], input")) {
       cursor.style.backgroundImage = "url('cursors/link.png')";
       return;
     }
+
     if (window.getSelection().toString().length > 0) {
       cursor.style.backgroundImage = "url('cursors/text.png')";
       return;
     }
+
     cursor.style.backgroundImage = "url('cursors/normal.png')";
   });
 } else if (cursor) {
-  cursor.style.display = "none"; 
+  cursor.style.display = "none";
 }
 
 // ==================================================
-// SMOKE CURSOR — SWIRL DESKTOP + SOFT CLOUD MOBILE
+// 3-COLOR FLUID CURSOR + FULL MULTI-TOUCH SUPPORT
 // ==================================================
 let auraEnabled = false;
 const auraButton = document.getElementById("aura-toggle");
 
-// Initialize button text
 if (auraButton) {
   auraButton.textContent = "Smokey Cursor Tail Off";
   auraButton.addEventListener("click", () => {
     auraEnabled = !auraEnabled;
-    auraButton.textContent = auraEnabled ? "Smokey Cursor Tail On" : "Smokey Cursor Tail Off";
+    auraButton.textContent = auraEnabled
+      ? "Smokey Cursor Tail On"
+      : "Smokey Cursor Tail Off";
+
     if (!auraEnabled) {
-      particles.length = 0;
+      fluidParticles.length = 0;
       ctx.clearRect(0, 0, width, height);
     }
   });
@@ -69,11 +74,11 @@ if (auraButton) {
 // =======================
 // CANVAS
 // =======================
-const canvas = document.getElementById("smokeCanvas");
+const canvas = document.getElementById("fluidCanvas");
 const ctx = canvas.getContext("2d");
 
-let width = (canvas.width = window.innerWidth);
-let height = (canvas.height = window.innerHeight);
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
 
 window.addEventListener("resize", () => {
   width = canvas.width = window.innerWidth;
@@ -81,112 +86,75 @@ window.addEventListener("resize", () => {
 });
 
 // =======================
-// POINTER STORAGE
+// POINTER STORAGE (UNLIMITED)
 // =======================
 const pointers = {};
-let particles = [];
-let smokeColor = { h: 0, s: 80, l: 65 };
+const fluidParticles = [];
 
-function pickRandomColor() {
-  smokeColor.h = Math.floor(Math.random() * 360);
-  smokeColor.s = 70 + Math.random() * 25;
-  smokeColor.l = 50 + Math.random() * 20;
-}
+// Three flowing hues
+const hues = [210, 270, 150];
 
 // =======================
-// PARTICLE CLASS
+// FLUID PARTICLE CLASS
 // =======================
-class SmokeParticle {
-  constructor(x, y, angle) {
+class FluidParticle {
+  constructor(x, y, hue, angleOffset) {
     this.x = x;
     this.y = y;
-
-    if (!isDesktop) {
-      // Optimized for Mobile/iPhone (Touch)
-      this.size = 12 + Math.random() * 10; 
-      this.life = 1.0;
-      this.fadeSpeed = 0.025; // Slightly faster for mobile performance
-      this.blur = 18; 
-      this.spin = (Math.random() - 0.5) * 0.15;
-      this.speed = 1.0;
-    } else {
-      // Desktop Settings
-      this.size = 18 + Math.random() * 12;
-      this.life = 1.0;
-      this.fadeSpeed = 0.015;
-      this.blur = 14;
-      this.spin = (Math.random() - 0.5) * 0.35;
-      this.speed = 1.6;
-    }
-
-    this.angle = angle + (Math.random() - 0.5);
+    this.hue = hue;
+    this.life = 1;
+    this.angle = angleOffset;
+    this.radius = 18;
   }
 
-  update() {
-    this.angle += this.spin;
-    this.x += Math.cos(this.angle) * this.speed;
-    this.y += Math.sin(this.angle) * this.speed;
-    this.life -= this.fadeSpeed;
+  update(tx, ty) {
+    this.angle += 0.12;
+
+    this.x += (tx + Math.cos(this.angle) * 20 - this.x) * 0.14;
+    this.y += (ty + Math.sin(this.angle) * 20 - this.y) * 0.14;
+
+    this.life -= 0.02;
   }
 
   draw() {
-    ctx.save();
-    ctx.globalCompositeOperation = "lighter";
-    // Using a simpler blur for mobile to maintain 60fps
-    ctx.filter = `blur(${this.blur}px)`;
-
-    ctx.fillStyle = `hsla(${smokeColor.h}, ${smokeColor.s}%, ${smokeColor.l}%, ${this.life * 0.5})`;
-
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.filter = "blur(22px)";
+    ctx.fillStyle = `hsla(${this.hue}, 80%, 65%, ${this.life * 0.35})`;
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
     ctx.fill();
-    ctx.restore();
   }
 }
 
 // =======================
-// ANIMATION LOOP
+// SPAWN FLUID (PER POINTER)
 // =======================
-function animate() {
-  ctx.clearRect(0, 0, width, height);
+function spawnFluid(x, y) {
+  hues.forEach((h, i) => {
+    fluidParticles.push(new FluidParticle(x, y, h, i * 2));
+  });
 
-  if (auraEnabled) {
-    for (const id in pointers) {
-      const p = pointers[id];
-      const dx = p.x - p.lastX;
-      const dy = p.y - p.lastY;
-      const speed = Math.hypot(dx, dy);
-
-      // Trigger smoke if moved
-      if (speed > 1.0) {
-        const angle = Math.atan2(dy, dx) + Math.PI / 2;
-        particles.push(new SmokeParticle(p.x, p.y, angle));
-      }
-
-      p.lastX = p.x;
-      p.lastY = p.y;
-    }
+  if (fluidParticles.length > 120) {
+    fluidParticles.splice(0, 3);
   }
-
-  for (let i = particles.length - 1; i >= 0; i--) {
-    particles[i].update();
-    particles[i].draw();
-    if (particles[i].life <= 0) particles.splice(i, 1);
-  }
-
-  requestAnimationFrame(animate);
 }
-animate();
 
 // =======================
 // MOUSE SUPPORT
 // =======================
 document.addEventListener("mousemove", (e) => {
-  if (!pointers.mouse) pickRandomColor();
-  
-  pointers.mouse = pointers.mouse || { x: e.clientX, y: e.clientY, lastX: e.clientX, lastY: e.clientY };
+  if (!pointers.mouse) {
+    pointers.mouse = {
+      x: e.clientX,
+      y: e.clientY,
+      lastX: e.clientX,
+      lastY: e.clientY,
+    };
+  }
+
   pointers.mouse.x = e.clientX;
   pointers.mouse.y = e.clientY;
+
+  if (auraEnabled) spawnFluid(e.clientX, e.clientY);
 });
 
 document.addEventListener("mouseleave", () => {
@@ -194,31 +162,40 @@ document.addEventListener("mouseleave", () => {
 });
 
 // =======================
-// TOUCH SUPPORT (iPhone/Mobile)
+// TOUCH SUPPORT (FULL MULTI-TOUCH)
 // =======================
-document.addEventListener("touchstart", (e) => {
-  pickRandomColor();
-  for (const t of e.touches) {
-    // FIXED: was setting y to t.clientX
-    pointers[t.identifier] = {
-      x: t.clientX,
-      y: t.clientY, 
-      lastX: t.clientX,
-      lastY: t.clientY,
-    };
-  }
-}, { passive: true });
+document.addEventListener(
+  "touchstart",
+  (e) => {
+    for (const t of e.touches) {
+      pointers[t.identifier] = {
+        x: t.clientX,
+        y: t.clientY,
+        lastX: t.clientX,
+        lastY: t.clientY,
+      };
 
-document.addEventListener("touchmove", (e) => {
-  // We track coordinates regardless of auraEnabled to keep 'lastX' updated
-  for (const t of e.touches) {
-    const p = pointers[t.identifier];
-    if (p) {
-      p.x = t.clientX;
-      p.y = t.clientY;
+      if (auraEnabled) spawnFluid(t.clientX, t.clientY);
     }
-  }
-}, { passive: true });
+  },
+  { passive: true }
+);
+
+document.addEventListener(
+  "touchmove",
+  (e) => {
+    for (const t of e.touches) {
+      const p = pointers[t.identifier];
+      if (p) {
+        p.x = t.clientX;
+        p.y = t.clientY;
+
+        if (auraEnabled) spawnFluid(t.clientX, t.clientY);
+      }
+    }
+  },
+  { passive: true }
+);
 
 function removeTouch(e) {
   for (const t of e.changedTouches) {
@@ -229,26 +206,97 @@ function removeTouch(e) {
 document.addEventListener("touchend", removeTouch);
 document.addEventListener("touchcancel", removeTouch);
 
+// =======================
+// ANIMATION LOOP
+// =======================
+function animate() {
+  ctx.clearRect(0, 0, width, height);
+  ctx.globalCompositeOperation = "lighter";
+
+  for (let i = fluidParticles.length - 1; i >= 0; i--) {
+    const p = fluidParticles[i];
+
+    // Find nearest pointer
+    let closest = null;
+    let minDist = Infinity;
+
+    for (const id in pointers) {
+      const pt = pointers[id];
+      const d = Math.hypot(p.x - pt.x, p.y - pt.y);
+      if (d < minDist) {
+        minDist = d;
+        closest = pt;
+      }
+    }
+
+    if (closest) {
+      p.update(closest.x, closest.y);
+    }
+
+    p.draw();
+
+    if (p.life <= 0) fluidParticles.splice(i, 1);
+  }
+
+  ctx.filter = "none";
+  ctx.globalCompositeOperation = "source-over";
+
+  requestAnimationFrame(animate);
+}
+animate();
+
+// =======================
+// DIGITAL CLOCK
+// =======================
+function updateClock() {
+  const now = new Date();
+
+  let hours = now.getHours();
+  const minutes = now.getMinutes().toString().padStart(2, "0");
+  const seconds = now.getSeconds().toString().padStart(2, "0");
+
+  const ampm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12 || 12;
+
+  const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
+
+  const dateString = now.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+
+  const timeEl = document.getElementById("digital-time");
+  const dateEl = document.getElementById("digital-date");
+
+  if (timeEl && dateEl) {
+    timeEl.textContent = timeString;
+    dateEl.textContent = dateString;
+  }
+}
+
+// Initial load
+updateClock();
+
+// Update every second
+setInterval(updateClock, 1000);
+
+
+// =======================
+// BACK TO TOP
+// =======================
 const mybutton = document.getElementById("backToTop");
 
-// Show/Hide button logic
-window.onscroll = function() {
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        mybutton.style.display = "block";
-    } else {
-        mybutton.style.display = "none";
-    }
+window.onscroll = () => {
+  if (!mybutton) return;
+  mybutton.style.display =
+    document.documentElement.scrollTop > 200 ? "block" : "none";
 };
 
-// Scroll to top logic
-mybutton.onclick = function() {
-    // Attempt smooth scroll first
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-
-    // Backup: If smooth scroll isn't supported, jump to top
-    document.documentElement.scrollTop = 0; 
+if (mybutton) {
+  mybutton.onclick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
-};
+  };
+}
