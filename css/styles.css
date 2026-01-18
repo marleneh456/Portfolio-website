@@ -197,19 +197,29 @@ body.dark-mode .header-clock {
   z-index: 998;
 }
 
+/* Toggle Button (kept your style) */
 #aura-toggle {
-  background: #ffcc00;
-  border: 2px solid #fff01f;
-  box-shadow: 0 0 12px #fff01f;
-  border-radius: 10px;
-  width: 110px;
+  background-color: #ffcc00;
+  border: none;
+  width: 100px;
   height: 70px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
+  transition: background 0.3s ease;
+  text-align: center;
+  opacity: 1; /* FULLY opaque */
+  position: relative;
+  z-index: 9999;
+  border: 2px solid #fff01f; /* Neon Yellow Border */
+  box-shadow: 0 0 10px #fff01f;
+  color: black;
 }
 
 #aura-toggle:hover {
   background-color: #ffaa00;
+  box-shadow: 0 0 15px #fff01f, 0 0 30px #fff01f;
 }
 
 /* Hide system cursor */
@@ -1179,9 +1189,10 @@ input:checked + .slider .circle {
   /* --- AURA BUTTON --- */
   #aura-toggle {
     font-size: 10px;
-    width: 100px;
+    width: 90px;
     height: 40px;
     padding: 5px;
+    margin-left: -12px;
   }
 
   h1{
