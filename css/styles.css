@@ -360,7 +360,7 @@ body.dark-mode .menu-toggle:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 20px;
+    padding: 20px;
     height: 40px;
     color: black;
     text-decoration: none;
@@ -1198,12 +1198,12 @@ body.dark-mode .Marlene-Habib-footer-icon{
 .nav-links li a {
     width: 75px; /* Small fixed width for consistency */
     height: 40px;
-    font-size: 10px;
+    font-size: 9px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 12px;
-    padding: 5px 8spx;
+    padding: 15px;
     text-decoration: none;
   }
 
