@@ -57,12 +57,12 @@ let auraEnabled = false;
 const auraButton = document.getElementById("aura-toggle");
 
 if (auraButton) {
-  auraButton.textContent = "Smokey Cursor Tail Off";
+  auraButton.textContent = "Fluid Cursor Tail Off";
   auraButton.addEventListener("click", () => {
     auraEnabled = !auraEnabled;
     auraButton.textContent = auraEnabled
-      ? "Smokey Cursor Tail On"
-      : "Smokey Cursor Tail Off";
+      ? "Fluid Cursor Tail On"
+      : "Fluid Cursor Tail Off";
 
     if (!auraEnabled) {
       fluidParticles.length = 0;
