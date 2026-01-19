@@ -276,34 +276,89 @@ header {
   gap: 10px;
 }
 
-/* ================= NAV LINKS ================= */
-.nav-links {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-flow: column;
-  gap: 10px;
-  padding: 0;
-  margin: 0;
+/* ================= TOGGLE BUTTON (Equal Sign) ================= */
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45px;      /* Adjust size of the white box */
+    height: 45px;
+    cursor: pointer;
+    background: white; /* White box from your drawing */
+    border-radius: 8px;
+    border: 4px solid #18aaff; /* Orange border */
+ box-shadow: 0 0 5px #18aaff;
+    position: relative;
+    margin-bottom: 15px;
 }
 
-/* Buttons */
+.menu-toggle:hover {
+  box-shadow: 0 0 15px #18aaff, 0 0 25px #18aaff;
+}
+
+/* The horizontal bars (= sign) */
+.bar {
+    width: 25px;
+    height: 4px;
+    background-color: #5b8bd5; /* Blue color from your image */
+    transition: all 0.3s ease-in-out;
+    border-radius: 2px;
+    position: absolute; /* Ensures they rotate from the same center point */
+}
+
+/* Initial "Equal" spacing */
+.bar1 { transform: translateY(-6px); }
+.bar2 { transform: translateY(6px); }
+
+/* ================= THE EVEN "X" ANIMATION ================= */
+.menu-toggle.open .bar1 {
+    transform: translateY(0) rotate(45deg); /* Centered rotation */
+}
+
+.menu-toggle.open .bar2 {
+    transform: translateY(0) rotate(-45deg); /* Perfect symmetrical X */
+}
+
+/* ================= NAV LINKS (Your Original Style) ================= */
+.nav-links {
+    list-style: none;
+    display: flex; /* Changed from grid to flex to match your image exactly */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    
+    /* Animation hidden state */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+}
+
+/* When active/open */
+.nav-links.show {
+    max-height: 500px;
+    opacity: 1;
+    padding: 10px 0;
+}
+
+
 .nav-links li a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  height: 40px;
-
-  color: black;
-  text-decoration: none;
-  border: 4px solid #ff6918;
-  background-color: #d5865b;
-  border-radius: 25px;
-
-  box-shadow: 0 0 5px #ff6918;
-  transition: all 0.3s ease-in-out;
-  font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    height: 40px;
+    color: black;
+    text-decoration: none;
+    border: 4px solid #ff6918; /* Orange border */
+    background-color: #d5865b; /* Tan/Orange background */
+    border-radius: 25px;       /* Pill shape */
+    box-shadow: 0 0 5px #ff6918;
+    font-size: 16px;
+    white-space: nowrap;
 }
 
 .nav-links li a:hover {

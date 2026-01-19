@@ -300,3 +300,14 @@ if (mybutton) {
     document.body.scrollTop = 0;
   };
 }
+
+
+const toggle = document.getElementById('menu-toggle');
+const nav = document.getElementById('nav-links');
+
+toggle.addEventListener('click', () => {
+    // Toggles the 'Equal' sign to 'X'
+    toggle.classList.toggle('open');
+    // Toggles the visibility of your original pill buttons
+    nav.classList.toggle('show');
+});
