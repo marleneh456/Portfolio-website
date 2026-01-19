@@ -1273,6 +1273,7 @@ input:checked + .slider .circle {
     height: 50px;
     padding: 5px;
     margin-left: -12px;
+    margin-top: 10px;
   }
 
   h1{
