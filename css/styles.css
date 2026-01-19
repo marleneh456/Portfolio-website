@@ -345,15 +345,14 @@ body.dark-mode .menu-toggle:hover {
     /* Animation hidden state */
     max-height: 0;
     opacity: 0;
-    overflow: hidden;
     transition: all 0.5s ease-in-out;
 }
 
 /* When active/open */
 .nav-links.show {
-    max-height: 500px;
+    max-height: 700px;
     opacity: 1;
-    padding: 10px 0;
+    padding: 20px 0;
 }
 
 
@@ -371,6 +370,8 @@ body.dark-mode .menu-toggle:hover {
     box-shadow: 0 0 5px #ff6918;
     font-size: 16px;
     white-space: nowrap;
+    margin-top: 10px;
+    transition: all 0.3s ease-in-out;
 }
 
 .nav-links li a:hover {
