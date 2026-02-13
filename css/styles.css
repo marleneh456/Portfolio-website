@@ -830,22 +830,8 @@ body.dark-mode #backToTop:hover {
 
 /* Contact Section Styles */
 .contact-section {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-}
-
-/* The Outer Neon Box */
-.contact-box {
-  border: 8px solid #87CEFA;
-  box-shadow: 0 0 20px #87CEFA;
-  max-width: 900px;
-  position: relative; /* Needed for heading positioning */
-  background-color: #dcd7e4;
-}
-
-.contact-content {
-  margin-top: 30px;
+display:flex;
+justify-content:center;
 }
 
 .contact-section p {
@@ -853,6 +839,43 @@ body.dark-mode #backToTop:hover {
   margin: 15px 0;
   padding: 10px;
   color: black;
+}
+
+
+.contact-box {
+max-width:800px;
+border:8px solid #87CEFA;
+box-shadow:0 0 20px #87CEFA;
+background:#dcd7e4;
+}
+
+#contactForm {
+display:flex;
+flex-direction:column;
+gap:15px;
+padding:30px;
+}
+
+input, textarea {
+padding:12px;
+border:2px solid #87CEFA;
+border-radius:6px;
+font-size:1rem;
+}
+
+textarea {
+min-height:130px;
+resize:vertical;
+}
+
+
+.send-btn {
+padding:12px;
+font-size:1.1rem;
+border:none;
+border-radius:8px;
+background:#87CEFA;
+cursor:pointer;
 }
 
 .contact-details p,
@@ -890,6 +913,13 @@ body.dark-mode #backToTop:hover {
   transform: scale(1.4);
   filter: brightness(0) saturate(100%) invert(13%) sepia(94%) saturate(5682%) hue-rotate(282deg) brightness(79%) contrast(113%);
 }
+
+#statusMsg {
+font-weight:bold;
+margin-top:8px;
+}
+
+
   
 /* Footer */
 footer {
@@ -1105,6 +1135,11 @@ body.dark-mode .soft-skill-card {
 
 body.dark-mode .soft-skill-card:hover {
   box-shadow: 0 0 15px #5c111e, 0 0 25px #5c111e;
+}
+
+body.dark-mode .send-btn {
+  background-color: #5986a3;
+  color:white;
 }
 
 /* Dark Mode Footer */

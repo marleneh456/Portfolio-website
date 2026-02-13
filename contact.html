@@ -7,6 +7,7 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
   <link rel="icon" href="icons/marlene-habib-icon.png" type="image/png">
   <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -67,37 +68,53 @@
   </div>
 </header>
 
-  <h1>Contact</h1>
-  
-  <section class="contact-section">
-    <div class="contact-box">
-      
-      <div class="contact-content">
-        <p>Let's connect! If you're curious about my work, want to collaborate, or just want to chat — I'm only a message away.</p>
-        <p>Feel free to send me an email, give me a call, or find me on social media below.</p>
+<h1>Contact</h1>
 
-        <div class="contact-details">
-          <p>
-            <img src="icons/email.svg" alt="Email" class="message-icon">
-            <a href="mailto:marlenehabib56@gmail.com" target="_blank">marlenehabib56@gmail.com</a>
-          </p>
-          <p>
-            <img src="icons/phone.svg" alt="Phone" class="message-icon">
-            <a href="tel:+16159831648" target="_blank">+1 (615) 983-1648</a>
-          </p>
-        </div>
+<section class="contact-section">
+<div class="contact-box">
+<p>Let’s connect! Whether you’re interested in my projects, looking to collaborate, or simply want to reach out, I’d love to hear from you.</p>
+<p>Use the contact form below to send me a message directly, or feel free to email or call me using the links provided. You can also connect with me on social media — I’m always open to new opportunities and conversations!</p>
 
-        <div class="social-icons">
-          <a href="https://www.linkedin.com/in/marlene-habib" target="_blank">
-            <img src="icons/linkedin.svg" alt="LinkedIn" class="linkdein-icon">
-          </a>
-          <a href="https://github.com/marleneh456" target="_blank">
-            <img src="icons/github.svg" alt="GitHub" class="contact-github-icon">
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+<form id="contactForm">
+
+<input name="first_name" placeholder="First Name" required>
+
+<input name="last_name" placeholder="Last Name" required>
+
+<input name="email" type="email" placeholder="Email" required>
+
+<input name="subject" placeholder="Subject" required>
+
+<textarea name="message" placeholder="Message" required></textarea>
+
+<button type="submit" class="send-btn">Send Message</button>
+
+  <div class="contact-details">
+    <p>
+      <img src="icons/email.svg" alt="Email" class="message-icon">
+      <a href="mailto:marlenehabib56@gmail.com" target="_blank">marlenehabib56@gmail.com</a>
+    </p>
+    <p>
+      <img src="icons/phone.svg" alt="Phone" class="message-icon">
+      <a href="tel:+16159831648" target="_blank">+1 (615) 983-1648</a>
+    </p>
+  </div>
+
+  <div class="social-icons">
+    <a href="https://www.linkedin.com/in/marlene-habib" target="_blank">
+      <img src="icons/linkedin.svg" alt="LinkedIn" class="linkdein-icon">
+    </a>
+    <a href="https://github.com/marleneh456" target="_blank">
+      <img src="icons/github.svg" alt="GitHub" class="contact-github-icon">
+    </a>
+  </div>
+
+<p id="statusMsg"></p>
+
+</form>
+
+</div>
+</section>
 
   <div id="customCursor"></div>
  <!-- Fluid Canvas -->

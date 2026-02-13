@@ -311,3 +311,36 @@ toggle.addEventListener('click', () => {
     // Toggles the visibility of your original pill buttons
     nav.classList.toggle('show');
 });
+
+emailjs.init("pQK6MPt2bMufnoKBV");
+
+const form = document.getElementById("contactForm");
+const statusMsg = document.getElementById("statusMsg");
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  statusMsg.textContent = "Sending message...";
+
+  const params = {
+    first_name: form.first_name.value,
+    last_name: form.last_name.value,
+    email: form.email.value,
+    subject: form.subject.value,
+    message: form.message.value
+  };
+
+  emailjs.send(
+    "service_rcn6fpc",
+    "template_f9sd7kn",
+    params
+  ).then(() => {
+
+    statusMsg.textContent = "Message sent successfully!";
+    form.reset();
+
+  }).catch(err => {
+    console.error(err);
+    statusMsg.textContent = "Failed to send message. Check console.";
+  });
+});
